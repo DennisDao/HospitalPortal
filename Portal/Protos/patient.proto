@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+option csharp_namespace = "GRPC.Patient";
+
+service PatientService {
+  // RPC method to list patient data
+  rpc ListPatients (Empty) returns (ListPatientsResponse);
+
+  // RPC method to add patient data
+  rpc AddPatient (AddPatientRequest) returns (Patient);
+}
+
+message Empty {}
+
+message Patient {
+  int32 id = 1; 
+  string name = 2; 
+  string date_of_birth = 3; 
+  string gender = 4; 
+  string city = 5;
+  string postal_code = 6; 
+  string ward = 7; 
+  string bed = 8; 
+  string unit = 9;
+  string admission_date = 10; 
+  string discharged_date = 11; 
+  string treating_doctor = 12; 
+}
+
+message ListPatientsResponse {
+  repeated Patient patients = 1;
+}
+
+message AddPatientRequest {
+  string name = 1;
+  string date_of_birth = 2;
+  string gender = 3;
+  string city = 4;
+  string postal_code = 5;
+  string ward = 6;
+  string bed = 7;
+  string unit = 8;
+  string admission_date = 9;
+  string discharged_date = 10;
+  string treating_doctor = 11;
+}
