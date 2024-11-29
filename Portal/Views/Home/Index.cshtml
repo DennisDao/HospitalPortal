@@ -4,6 +4,10 @@
     ViewData["Title"] = "Patient List";
 }
 
+<button type="button" class="btn btn-success" asp-action="New" asp-controller="Home" onclick="location.href='@Url.Action("New", "Home")'">
+    Add Patient
+</button>
+
 <div class="container mt-5">
     <h2 class="mb-4">Patient List</h2>
     <table class="table table-striped">

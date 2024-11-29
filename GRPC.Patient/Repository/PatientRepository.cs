@@ -1,4 +1,5 @@
 ﻿
+
 namespace GRPC.Patient.Repository
 {
     public class PatientRepository : IPatientRepository
@@ -7,6 +8,12 @@ namespace GRPC.Patient.Repository
         public PatientRepository(Data.ApplicationDbContext context)
         {
             _context = context;    
+        }
+
+        public void AddPatient(Domain.Patient patient)
+        {
+             _context.Patients.Add(patient);    
+             _context.SaveChanges();
         }
 
         public ICollection<Domain.Patient> GetAllPatients()

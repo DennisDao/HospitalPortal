@@ -1,6 +1,7 @@
 using Grpc.Net.Client;
 using GRPC.Patient;
 using Microsoft.AspNetCore.Mvc;
+using Portal.Connectors;
 using Portal.Models;
 using System.Diagnostics;
 
@@ -9,28 +10,31 @@ namespace Portal.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly PatientConnector _connector;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, PatientConnector connector)
         {
             _logger = logger;
+            _connector = connector;
         }
 
         public async Task<IActionResult> Index()
         {
-            var channel = GrpcChannel.ForAddress("http://localhost:5035");
-            var client = new PatientService.PatientServiceClient(channel);
-            var response = await client.ListPatientsAsync(new GRPC.Patient.Empty());
+            var data = await _connector.ListPatientsAsync();
+            return View(data);
+        }
 
-            List<PatientViewModel> result = new List<PatientViewModel>();
+        public IActionResult New()
+        {
+            var patient = new PatientViewModel();
+            return View(patient);
+        }
 
-            foreach (var p in response.Patients) 
-            {
-                result.Add(p.ToDto());
-            }
-
-            await channel.ShutdownAsync();
-
-            return View(result);
+        [HttpPost]
+        public async Task<IActionResult> AddPatient([FromBody] PatientViewModel patient)
+        {
+            var response = await _connector.AddPatient(patient);
+            return Redirect("/home/index");
         }
 
         public IActionResult Privacy()

@@ -2,7 +2,10 @@
 {
     public interface IPatientRepository
     {
-        /// <summary> Get all customers </summary>
+        /// <summary> Get all patients </summary>
         ICollection<Domain.Patient> GetAllPatients();
+
+        /// <summary>Create a new patient </summary>
+        void AddPatient(Domain.Patient patient);
     }
 }

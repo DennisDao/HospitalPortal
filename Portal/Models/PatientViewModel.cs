@@ -39,5 +39,23 @@ namespace Portal.Models
                 TreatingDoctor = patient.TreatingDoctor,
             };
         }
+
+        public static AddPatientRequest ToPatientRequest(this PatientViewModel patient)
+        {
+            return new AddPatientRequest
+            {
+                Name = patient.Name,
+                DateOfBirth = patient.DateOfBirth,
+                Gender = patient.Gender,
+                City = patient.City,
+                PostalCode = patient.PostalCode,
+                Ward = patient.Ward,
+                Bed = patient.Bed,
+                Unit = patient.Unit,
+                AdmissionDate = patient.AdmissionDate,
+                DischargedDate = patient.DischargedDate,
+                TreatingDoctor = patient.TreatingDoctor,
+            };
+        }
     }
 }

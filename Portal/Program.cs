@@ -1,7 +1,12 @@
+using Portal.Connectors;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Add services 
+builder.Services.AddScoped<PatientConnector>();
 
 var app = builder.Build();
 

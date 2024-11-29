@@ -26,9 +26,4 @@
     <Protobuf Include="Protos\patient.proto" GrpcServices="Client" />
   </ItemGroup>
 
-
-  <ItemGroup>
-    <Folder Include="Connectors\" />
-  </ItemGroup>
-
 </Project>
