@@ -29,3 +29,12 @@ Accessed by the backend service to securely connect to the database and other se
 ![image](https://github.com/user-attachments/assets/dab82c04-b611-46b1-9283-e29a2e4b6692)
 
 ##  Setup and running the project
+1. Download or clone the project
+2. After downloading and extracting open the HospitalPortal.sln to the source code in Visual Studio
+3. Build and clean the solution
+4. Set multiple running solutions as per the screenshot below
+   
+   ![image](https://github.com/user-attachments/assets/f6d4d186-bab3-4094-93b4-95eb75365b4a)
+
+   ![image](https://github.com/user-attachments/assets/ea82910a-5d98-419c-95aa-63d9dd717e9a)
+   
