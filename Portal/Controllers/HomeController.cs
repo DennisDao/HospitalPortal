@@ -31,7 +31,7 @@ namespace Portal.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPatient([FromBody] PatientViewModel patient)
+        public async Task<IActionResult> AddPatient(PatientViewModel patient)
         {
             var response = await _connector.AddPatient(patient);
             return Redirect("/home/index");
