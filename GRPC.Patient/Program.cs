@@ -4,22 +4,35 @@ using GRPC.Patient.Seeder;
 using GRPC.Patient.Services;
 using Microsoft.EntityFrameworkCore;
 using System;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("ApplicationConnectionString");
+
 var isUseInMemory = true;
 // Add services to the container.
 builder.Services.AddGrpc();
 
-if (isUseInMemory)
+if (builder.Environment.IsDevelopment())
 {
-    builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase("Hospital"));
+    var connectionString = builder.Configuration.GetConnectionString("ApplicationConnectionString");
+
+    if (isUseInMemory)
+    {
+        builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase("Hospital"));
+    }
+    else
+    {
+        builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+    }
 }
 else
 {
-    builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+   var azureConnectionString = Environment.GetEnvironmentVariable("AZURE_SQL_CONNECTIONSTRING");
+   builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(azureConnectionString));
 }
+
+
 
 // Register services 
 builder.Services.AddScoped<IPatientRepository, PatientRepository>();
