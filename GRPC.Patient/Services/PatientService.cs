@@ -1,34 +1,30 @@
 ﻿using Grpc.Core;
 using GRPC.Patient;
+using GRPC.Patient.Repository;
 
 namespace GRPC.Patient.Services
 {
     public sealed class PatientService : GRPC.Patient.PatientService.PatientServiceBase
     {
+        private readonly IPatientRepository _patientRepository;
+        public PatientService(IPatientRepository patientRepository)
+        {
+            _patientRepository = patientRepository;
+        }
+
         public override Task<ListPatientsResponse> ListPatients(Empty request, ServerCallContext context)
         {
-            var patients = new List<Patient>
+            var domainPatients = _patientRepository.GetAllPatients();
+            var patientsResponse = new List<Patient>();
+
+            foreach (var domainPatient in domainPatients)
             {
-                new Patient
-                {
-                    Id = 1,
-                    Name = "Dennis",
-                    DateOfBirth = "1990-01-01",
-                    Gender = "Male",
-                    City = "Melbourne",
-                    PostalCode = "3000",
-                    Ward = "A1",
-                    Bed = "101",
-                    Unit = "Cardiology",
-                    AdmissionDate = "2023-01-01",
-                    DischargedDate = "2023-01-10",
-                    TreatingDoctor = "Dr. Smith"
-                }
-            };
+                patientsResponse.Add(domainPatient.ToProto());
+            }
 
             var response = new ListPatientsResponse
             {
-                Patients = { patients } 
+                Patients = { patientsResponse } 
             };
 
             return Task.FromResult(response);

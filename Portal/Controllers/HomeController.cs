@@ -1,4 +1,3 @@
-using Google.Protobuf.WellKnownTypes;
 using Grpc.Net.Client;
 using GRPC.Patient;
 using Microsoft.AspNetCore.Mvc;
