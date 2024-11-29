@@ -14,7 +14,7 @@ builder.Services.AddGrpc();
 
 if (isUseInMemory)
 {
-    builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase("TPFSports"));
+    builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase("Hospital"));
 }
 else
 {
