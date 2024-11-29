@@ -5,6 +5,8 @@ This diagram illustrates the architecture of a hospital portal system, focusing 
 
 ![image](https://github.com/user-attachments/assets/6305995e-6bc3-440a-947b-d3cfcd510d93)
 
+The system layout applies to Dev, Test and Production enviroment
+
 ### Components
 
 ### 1. Hospital Portal (Front-end)
@@ -22,3 +24,8 @@ Used by the backend service to store and retrieve patient data securely.
 ### 4. Key Vaults
 Stores connection strings and other secrets securely.
 Accessed by the backend service to securely connect to the database and other services.
+
+### Microsoft Azure Estimate							
+![image](https://github.com/user-attachments/assets/dab82c04-b611-46b1-9283-e29a2e4b6692)
+
+##  Setup and running the project
